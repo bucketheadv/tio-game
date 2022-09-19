@@ -1,0 +1,8 @@
+proto:
+  pkg:
+    path: com.sven.tio.common.proto
+
+tio:
+  port: 9420
+  handler:
+    path: com.sven.tio.game.tcp.handler
