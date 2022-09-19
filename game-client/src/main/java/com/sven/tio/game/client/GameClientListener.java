@@ -12,7 +12,7 @@ import org.tio.core.intf.Packet;
  */
 @Slf4j
 @Component
-public class TioGameClientListener implements TioClientListener {
+public class GameClientListener implements TioClientListener {
 	@Override
 	public void onAfterConnected(ChannelContext channelContext, boolean isConnected, boolean isReconnect) throws Exception {
 
@@ -35,7 +35,6 @@ public class TioGameClientListener implements TioClientListener {
 
 	@Override
 	public void onAfterHandled(ChannelContext channelContext, Packet packet, long cost) throws Exception {
-		log.info("处理消息: {}", packet);
 	}
 
 	@Override

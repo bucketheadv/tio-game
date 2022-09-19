@@ -17,7 +17,7 @@ public class QueueMessageBuffer<T extends MessageLite> implements MessageBuffer<
 
 	@Override
 	public boolean offer(HandlerDataModal<T> handlerDataModal) {
-		if (queue.size() > MAX_LENGTH) {
+		if (queue.size() >= MAX_LENGTH) {
 			return false;
 		}
 		return queue.offer(handlerDataModal);

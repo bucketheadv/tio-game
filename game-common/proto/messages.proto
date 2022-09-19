@@ -21,6 +21,10 @@ message HeartBeatMessage {
   string message = 1;
 }
 
+message ServerBusyMessage {
+  string message = 1;
+}
+
 //公共头
 message CommonProtocol {
   message CommonHeader {

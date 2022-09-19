@@ -13,7 +13,6 @@ import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -43,8 +42,7 @@ public class HandlerService<T extends MessageLite> {
 	@Value("${tio.handler.path}")
 	private String tioHandlerPath;
 
-	@Autowired
-	private ApplicationContext applicationContext;
+	private final ApplicationContext applicationContext;
 
 	@PostConstruct
 	@SuppressWarnings({"unchecked"})
@@ -64,7 +62,7 @@ public class HandlerService<T extends MessageLite> {
 		doHandler();
 	}
 
-	public HandlerService() {
+	public HandlerService(ApplicationContext applicationContext) {
 		executorService = Executors.newFixedThreadPool(THREAD_POOL_SIZE, new ThreadFactory() {
 			private final AtomicInteger i = new AtomicInteger(0);
 			@Override
@@ -74,10 +72,11 @@ public class HandlerService<T extends MessageLite> {
 				return thread;
 			}
 		});
+		this.applicationContext = applicationContext;
 	}
 
-	public void offer(HandlerDataModal<T> handlerDataModal) {
-		buffer.offer(handlerDataModal);
+	public boolean offer(HandlerDataModal<T> handlerDataModal) {
+		return buffer.offer(handlerDataModal);
 	}
 
 	private void doHandler() {

@@ -35,6 +35,11 @@ public final class Messages {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_HeartBeatMessage_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ServerBusyMessage_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ServerBusyMessage_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_CommonProtocol_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -62,17 +67,18 @@ public final class Messages {
       "\030\002 \001(\t\022\017\n\007payload\030\017 \001(\014\".\n\014LoginMessage\022" +
       "\014\n\004name\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\"\'\n\023Regis" +
       "terRoutMessage\022\020\n\010serverId\030\001 \001(\005\"#\n\020Hear" +
-      "tBeatMessage\022\017\n\007message\030\001 \001(\t\"\341\002\n\016Common" +
-      "Protocol\0220\n\nCommHeader\030\001 \001(\0132\034.CommonPro" +
-      "tocol.CommonHeader\0224\n\nLiveHeader\030\002 \001(\0132 " +
-      ".CommonProtocol.LiveCommonHeader\022\014\n\004Data" +
-      "\030\003 \001(\014\032R\n\014CommonHeader\022\021\n\tCommandId\030\001 \001(" +
-      "\r\022\r\n\005SeqId\030\002 \001(\r\022\017\n\007Version\030\003 \001(\r\022\017\n\007Fro" +
-      "mUid\030\004 \001(\t\032\204\001\n\020LiveCommonHeader\022\020\n\010LiveT" +
-      "ype\030\001 \001(\r\022\016\n\006LiveId\030\002 \001(\r\022\022\n\nDemandType\030" +
-      "\003 \001(\r\022\020\n\010DemandId\030\004 \001(\r\022\022\n\nToDemandId\030\005 " +
-      "\001(\r\022\024\n\014ToDemandType\030\006 \001(\rB\035\n\031com.sven.ti" +
-      "o.common.protoP\001b\006proto3"
+      "tBeatMessage\022\017\n\007message\030\001 \001(\t\"$\n\021ServerB" +
+      "usyMessage\022\017\n\007message\030\001 \001(\t\"\341\002\n\016CommonPr" +
+      "otocol\0220\n\nCommHeader\030\001 \001(\0132\034.CommonProto" +
+      "col.CommonHeader\0224\n\nLiveHeader\030\002 \001(\0132 .C" +
+      "ommonProtocol.LiveCommonHeader\022\014\n\004Data\030\003" +
+      " \001(\014\032R\n\014CommonHeader\022\021\n\tCommandId\030\001 \001(\r\022" +
+      "\r\n\005SeqId\030\002 \001(\r\022\017\n\007Version\030\003 \001(\r\022\017\n\007FromU" +
+      "id\030\004 \001(\t\032\204\001\n\020LiveCommonHeader\022\020\n\010LiveTyp" +
+      "e\030\001 \001(\r\022\016\n\006LiveId\030\002 \001(\r\022\022\n\nDemandType\030\003 " +
+      "\001(\r\022\020\n\010DemandId\030\004 \001(\r\022\022\n\nToDemandId\030\005 \001(" +
+      "\r\022\024\n\014ToDemandType\030\006 \001(\rB\035\n\031com.sven.tio." +
+      "common.protoP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -102,8 +108,14 @@ public final class Messages {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_HeartBeatMessage_descriptor,
         new java.lang.String[] { "Message", });
-    internal_static_CommonProtocol_descriptor =
+    internal_static_ServerBusyMessage_descriptor =
       getDescriptor().getMessageTypes().get(4);
+    internal_static_ServerBusyMessage_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ServerBusyMessage_descriptor,
+        new java.lang.String[] { "Message", });
+    internal_static_CommonProtocol_descriptor =
+      getDescriptor().getMessageTypes().get(5);
     internal_static_CommonProtocol_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_CommonProtocol_descriptor,

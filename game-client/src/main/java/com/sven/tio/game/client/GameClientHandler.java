@@ -4,6 +4,7 @@ import com.google.protobuf.MessageLite;
 import com.sven.tio.common.packet.MessagePacket;
 import com.sven.tio.common.proto.HeartBeatMessage;
 import com.sven.tio.common.protobuf.AbstractProtobufHandler;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.tio.client.intf.TioClientHandler;
@@ -14,8 +15,9 @@ import org.tio.core.intf.Packet;
  * @author qinglinl
  * Created on 2022/9/19 3:24 PM
  */
+@Slf4j
 @Component
-public class TioGameClientHandler extends AbstractProtobufHandler implements TioClientHandler {
+public class GameClientHandler extends AbstractProtobufHandler implements TioClientHandler {
 	@Value("${proto.pkg.path}")
 	private String protoClassPath;
 
@@ -32,5 +34,6 @@ public class TioGameClientHandler extends AbstractProtobufHandler implements Tio
 
 	@Override
 	public void doHandler(MessageLite packet, ChannelContext channelContext) throws Exception {
+		log.info("处理消息: {}", packet.toByteString().toStringUtf8().replace("\n", ""));
 	}
 }
