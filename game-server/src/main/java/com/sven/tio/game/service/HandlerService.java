@@ -69,7 +69,7 @@ public class HandlerService<T extends MessageLite> {
 			@Override
 			public Thread newThread(@NonNull Runnable r) {
 				Thread thread = new Thread(r);
-				thread.setName("handler-service-thread-" + i.addAndGet(1));
+				thread.setName("handler-thread-" + i.addAndGet(1));
 				return thread;
 			}
 		});
