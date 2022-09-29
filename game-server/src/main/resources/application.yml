@@ -6,3 +6,7 @@ tio:
   port: 9420
   handler:
     path: com.sven.tio.game.tcp.handler
+
+logging:
+  level:
+    com.sven.tio.game.service: DEBUG

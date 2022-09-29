@@ -1,7 +1,8 @@
-package com.sven.tio.game.tcp.handler;
+package com.sven.tio.game.tcp.handler.biz;
 
 import com.sven.tio.common.proto.HeartBeatMessage;
 import com.sven.tio.game.annotation.HandlerMapping;
+import com.sven.tio.game.tcp.handler.AbstractMessageHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.tio.core.ChannelContext;
@@ -13,7 +14,7 @@ import org.tio.core.ChannelContext;
 @Slf4j
 @Component
 @HandlerMapping("HeartBeatMessage")
-public class HeartBeatMessageHandler extends AbstractDataHandler<HeartBeatMessage> {
+public class HeartBeatMessageHandler extends AbstractMessageHandler<HeartBeatMessage> {
 	@Override
 	public void onEvent(HeartBeatMessage heartBeatMessage, ChannelContext ctx) throws Exception {
 		log.debug("心跳消息: {}", heartBeatMessage.getMessage());

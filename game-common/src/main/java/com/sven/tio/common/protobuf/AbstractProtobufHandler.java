@@ -37,7 +37,7 @@ public abstract class AbstractProtobufHandler implements TioServerHandler {
 
 	@PostConstruct
 	public void init() {
-		List<Class<?>> classes = ClassUtil.getAllClassBySubClass(MessageLite.class, true, getMessageClassPath());
+		List<Class<?>> classes = ClassUtil.getAllClassBySubClass(MessageLite.class, getMessageClassPath());
 		classes.stream().filter(protoClass -> !Objects.equals(protoClass, Frame.class)).forEach(protoClass -> {
 			try {
 				methodCache.put(protoClass.getSimpleName(), protoClass.getMethod("parseFrom", ByteString.class));

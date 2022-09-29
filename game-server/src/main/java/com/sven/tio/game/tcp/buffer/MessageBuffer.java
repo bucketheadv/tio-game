@@ -1,4 +1,4 @@
-package com.sven.tio.game.tcp.buff;
+package com.sven.tio.game.tcp.buffer;
 
 import com.google.protobuf.MessageLite;
 import com.sven.tio.common.packet.HandlerDataModal;

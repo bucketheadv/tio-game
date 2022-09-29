@@ -7,7 +7,7 @@ import org.tio.core.ChannelContext;
  * @author qinglinl
  * Created on 2022/9/19 1:26 PM
  */
-public interface DataHandler<T extends MessageLite> {
+public interface MessageHandler<T extends MessageLite> {
 	/**
 	 * 消息处理方法
 	 * @param t   消息对象

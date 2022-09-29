@@ -3,10 +3,11 @@ package com.sven.tio.game.service;
 import cn.hutool.core.util.StrUtil;
 import com.google.common.collect.Maps;
 import com.google.protobuf.MessageLite;
+import com.sven.tio.common.proto.HeartBeatMessage;
 import com.sven.tio.game.annotation.HandlerMapping;
-import com.sven.tio.game.tcp.handler.DataHandler;
-import com.sven.tio.game.tcp.buff.MessageBuffer;
-import com.sven.tio.game.tcp.buff.QueueMessageBuffer;
+import com.sven.tio.game.tcp.handler.MessageHandler;
+import com.sven.tio.game.tcp.buffer.MessageBuffer;
+import com.sven.tio.game.tcp.buffer.QueueMessageBuffer;
 import com.sven.tio.common.packet.HandlerDataModal;
 import com.sven.tio.common.util.ClassUtil;
 import jakarta.annotation.PostConstruct;
@@ -31,7 +32,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Slf4j
 @Component
 public class HandlerService<T extends MessageLite> {
-	private final Map<String, DataHandler<T>> instanceCache = Maps.newConcurrentMap();
+	private final Map<String, MessageHandler<T>> instanceCache = Maps.newConcurrentMap();
 
 	private final MessageBuffer<T> buffer = new QueueMessageBuffer<>();
 
@@ -48,12 +49,12 @@ public class HandlerService<T extends MessageLite> {
 	@SuppressWarnings({"unchecked"})
 	public void init() {
 		try {
-			List<Class<?>> classList = ClassUtil.getAllClassBySubClass(DataHandler.class, true, tioHandlerPath);
+			List<Class<?>> classList = ClassUtil.getAllClassBySubClass(MessageHandler.class, tioHandlerPath);
 			for (Class<?> clazz : classList) {
 				HandlerMapping annotation = clazz.getAnnotation(HandlerMapping.class);
 				if (annotation != null) {
 					String name = StrUtil.lowerFirst(annotation.value() + "Handler");
-					instanceCache.put(annotation.value(), applicationContext.getBean(name, DataHandler.class));
+					instanceCache.put(annotation.value(), applicationContext.getBean(name, MessageHandler.class));
 				}
 			}
 		} catch (Exception e) {
@@ -85,9 +86,13 @@ public class HandlerService<T extends MessageLite> {
 				while (!Thread.currentThread().isInterrupted()) {
 					HandlerDataModal<T> handlerDataModal = buffer.poll();
 					if (handlerDataModal != null) {
-						log.info("正在处理消息: {}", handlerDataModal);
 						T messageLite = handlerDataModal.getMessageLite();
-						DataHandler<T> handler = getHandlerInstance(messageLite.getClass().getSimpleName());
+						if (messageLite instanceof HeartBeatMessage) {
+							log.debug("收到心跳包: {}", handlerDataModal);
+						} else {
+							log.info("正在处理消息: {}", handlerDataModal);
+						}
+						MessageHandler<T> handler = getHandlerInstance(messageLite.getClass().getSimpleName());
 						if (handler == null) {
 							log.info("获取handler: {} 失败", messageLite.getClass().getSimpleName());
 							throw new RuntimeException("handler not found");
@@ -104,7 +109,7 @@ public class HandlerService<T extends MessageLite> {
 		executorService.shutdown();
 	}
 
-	public DataHandler<T> getHandlerInstance(String name) {
+	public MessageHandler<T> getHandlerInstance(String name) {
 		return instanceCache.get(name);
 	}
 }

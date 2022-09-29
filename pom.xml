@@ -32,7 +32,7 @@
 		<dependency>
 			<groupId>org.t-io</groupId>
 			<artifactId>tio-core</artifactId>
-			<version>3.8.2.v20220628-RELEASE</version>
+			<version>3.8.3.v20220902-RELEASE</version>
 			<exclusions>
 				<exclusion>
 					<groupId>com.alibaba</groupId>
@@ -48,12 +48,17 @@
 		<dependency>
 			<groupId>cn.hutool</groupId>
 			<artifactId>hutool-core</artifactId>
-			<version>4.4.5</version>
+			<version>5.8.7</version>
 		</dependency>
 		<dependency>
 			<groupId>org.nutz</groupId>
 			<artifactId>nutz</artifactId>
-			<version>1.r.68-SNAPSHOT</version>
+			<version>1.r.69.v20220703</version>
+		</dependency>
+		<dependency>
+			<groupId>org.yaml</groupId>
+			<artifactId>snakeyaml</artifactId>
+			<version>1.33</version>
 		</dependency>
 
 		<dependency>

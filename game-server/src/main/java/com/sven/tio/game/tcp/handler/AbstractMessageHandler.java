@@ -9,7 +9,7 @@ import org.tio.core.ChannelContext;
  * Created on 2022/9/19 1:28 PM
  */
 @Slf4j
-public abstract class AbstractDataHandler<T extends MessageLite> implements DataHandler<T> {
+public abstract class AbstractMessageHandler<T extends MessageLite> implements MessageHandler<T> {
 	@Override
 	public void handle(T t, ChannelContext ctx) {
 		try {

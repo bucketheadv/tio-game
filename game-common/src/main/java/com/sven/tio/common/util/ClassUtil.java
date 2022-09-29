@@ -21,8 +21,8 @@ public class ClassUtil {
 	 * @param packages  限定寻找的包名，前缀匹配模式 findInJar为true时建议一定要限制包名提升速度和避免出错！
 	 * @return
 	 */
-	public static List<Class<?>> getAllClassBySubClass(Class<?> clazz, boolean findInJar, String... packages) {
-		return getClasspathAllClass(findInJar, packages).stream().filter(c -> !c.isInterface()).filter(c -> !Modifier.isAbstract(c.getModifiers())).filter(c -> clazz.isAssignableFrom(c)).collect(Collectors.toList());
+	public static List<Class<?>> getAllClassBySubClass(Class<?> clazz, String... packages) {
+		return getClasspathAllClass(packages).stream().filter(c -> !c.isInterface()).filter(c -> !Modifier.isAbstract(c.getModifiers())).filter(c -> clazz.isAssignableFrom(c)).collect(Collectors.toList());
 	}
 
 	/**
@@ -30,7 +30,7 @@ public class ClassUtil {
 	 *
 	 * @return
 	 */
-	private static List<Class<?>> getClasspathAllClass(boolean findInJar, String... packages) {
+	private static List<Class<?>> getClasspathAllClass(String... packages) {
 		List<Class<?>> classes = new ArrayList<>();
 		Scans scans = Scans.me();
 		Lang.each(packages, (Each<String>) (index, pkg, length) -> classes.addAll(scans.scanPackage(pkg)));
